@@ -22,7 +22,7 @@ function Recipe() {
     
 
     <div class="recipt">
-   <h1>Grow smart</h1>
+   <h1>Tech-Farm</h1>
    <div className="container">
    
  

@@ -1,40 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next'
-import { slide as Menu } from 'react-burger-menu';
-import Axios from 'axios'
 import { useState } from "react";
 import './i18';
 
-import Sidebar from "../pages/sidetest";
-const languages = [
-    { value: '', text: "Options" },
-    { value: 'en', text: "English" },
-    { value: 'gu', text: "ગુજરાતી" },
-    { value: 'hi', text: "Hindi" },
-
-]
-
-
 function Searchbar() {
     const { t } = useTranslation();
-    const [lang, setLang] = useState('value');
     const [searchword, setsearchword] = useState('');
-    const [list, setlist] = useState('');
     let user = JSON.parse(localStorage.getItem('mydata'));
 
-    const handleChange = e => {
-        setLang(e.target.value);
-        let loc = "http://localhost:3000/";
-        window.location.replace(loc + "?lng=" + e.target.value);
-    }
-
     function logout() {
-        alert("logout Sucessfully");
+        alert("Logout Successfully");
         localStorage.clear()
         window.location = "/";
-
     }
+
     function login() {
         window.location = "/Login"
     }
@@ -43,197 +23,171 @@ function Searchbar() {
         window.location = "/Profile"
     }
 
-
     function postsearch() {
-
-        //              Axios.post("http://localhost:1137/api/findword",{searchword:searchword }).then((response)=>{
-        // if(response.data){
-        //     // this.state={srch: response.data}
-
-        //     <Link to= "/fff" state={{srch:searchword}}></Link>
-        //     // window.location.href = 'http://localhost:3000/fff?srcdata=${srch}';
-        //     alert(response.data)
-        //    // window.location='/fff' ;
-
-        //     alert(response.data)
-        //     setlist(response.data);
-
-
-
-        // }
-
-        // else{
-
-
-        //     alert(response.data.msg);
-        //     <h2>Not Found !!!!!</h2>    
-        // }
-
-        // })
+        // Search functionality
     }
 
     return (
         <>
-
-            <div class="mainhead">
-                <div class="header_section">
-
-
-                    <div class="container">
-                        <div class="containt_main">
-                            <div class="btnslider">
-
-                            </div>
-
-
-
-
-
-
-                            <div class="main">
-
-                                <div class="input-group">
-
-                                    <input type="text" class="form-control" placeholder="Search" onChange={(e) => setsearchword(e.target.value)} />
-
-
-                                    <div class="input-group-append">
-                                        <Link to="/fff" state={{ srch: searchword }}>
-                                            <button class="srch" type="button" onClick={postsearch}>
-                                                <i class="fa fa-search"></i> </button>
-                                        </Link> </div>
-                                </div>
-                            </div>
-                            <div class="header_box">
-
-                                {/* <div class="custom_menu">
-                                    <ul>
-
-
-
-                                        <select class="form-select  form-select-sm" aria-label=".form-select-sm example">
-                                        <option selected>Engilsh</option>
-                                        <option value="1">हिन्दी</option>
-                                        <option value="2">ગુજરાતી</option>
-
-                                    </select>
-
-
-
-                                        <select value={lang} onChange={handleChange}>
-                                            {languages.map(item => {
-                                                return (<option key={item.value}
-                                                    value={item.value}>{item.text}</option>);
-                                            })}
-                                        </select>
-                                    </ul>
-                                </div> */}
-
-                                <div class="login_menu">
-                                    <ul>
-                                        <li>
-                                            {localStorage.getItem("mydata") == null ?
-                                                <>
-
-                                                </>
-                                                :
-                                                <>
-                                                    <button class="logoutbtn" onClick={profile} >{user.u_firstname}</button>
-                                                </>
-                                            }
-                                        </li></ul>
-
-                                    <ul>
-                                        <li>
-                                            {localStorage.getItem("mydata") == null ?
-                                                <>
-                                                    <button class="logoutbtn" onClick={login}>Login</button>
-                                                </>
-                                                :
-                                                <>
-
-
-
-
-                                                </>
-                                            }
-                                        </li>
-                                    </ul>
-
-
-
-
-                                </div>
-
-                                {localStorage.getItem("mydata") == null ?
-                                    <>
-
-                                    </>
-                                    :
-                                    <>
-                                        <div class="cart">
-                                            <ul>
-                                                <li>
-                                                    <Link to="/Cart">
-                                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                    </Link>
-                                                </li>
-
-
-                                            </ul>
-                                        </div>
-                                    </>
-                                }
-
-
-                            </div>
-                        </div>
-                    </div>
+            <div className="container-modern">
+                {/* Main Search Section */}
+                <div className="modern-search" style={{ marginBottom: '24px' }}>
+                    <i className="fa fa-search search-icon"></i>
+                    <input 
+                        type="text" 
+                        className="search-input" 
+                        placeholder="Search for products, schemes, or farming tips..." 
+                        value={searchword}
+                        onChange={(e) => setsearchword(e.target.value)}
+                    />
+                    <Link to="/fff" state={{ srch: searchword }}>
+                        <button className="search-btn" onClick={postsearch}>
+                            <i className="fa fa-search"></i>
+                        </button>
+                    </Link>
                 </div>
 
+                {/* Modern Navigation */}
+                <div className="modern-nav">
+                    <nav className="d-flex justify-content-center">
+                        <ul style={{ 
+                            display: 'flex', 
+                            listStyle: 'none', 
+                            margin: 0, 
+                            padding: 0,
+                            flexWrap: 'wrap',
+                            justifyContent: 'center'
+                        }}>
+                            <li className="nav-item">
+                                <Link to="/" className="nav-link">
+                                    <i className="fa fa-home" style={{ marginRight: '8px' }}></i>
+                                    Home
+                                </Link>
+                            </li>
 
-                <div id="header" class="container">
-                    <div class="row">
-                        <div class="col-md-12 margin-top-30">
-                            <div id="hornav" class="pull-right visible-lg">
-                                <ul class="nav navbar-nav">
-                                    <li><Link to="/"> <span>Home</span></Link></li>
+                            <li className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i className="fa fa-shopping-bag" style={{ marginRight: '8px' }}></i>
+                                    Products & Equipment
+                                </a>
+                                <ul className="dropdown-menu agriculture-card" style={{ border: 'none', marginTop: '8px' }}>
+                                    <li><Link to="/Product" className="dropdown-item">
+                                        <i className="fa fa-leaf" style={{ marginRight: '8px', color: '#4CAF50' }}></i>
+                                        Products
+                                    </Link></li>
+                                    <li><Link to="/Equipment" className="dropdown-item">
+                                        <i className="fa fa-cogs" style={{ marginRight: '8px', color: '#4CAF50' }}></i>
+                                        Equipment
+                                    </Link></li>
+                                </ul>
+                            </li>
 
-                                    <li><span>Products & Equipment</span>
-                                        <ul>
-                                            <Link to="/Product"><li ><span>Products </span></li></Link>
-                                            <Link to="/Equipment"> <li><span>Eqipmnents</span></li></Link>
+                            <li className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i className="fa fa-university" style={{ marginRight: '8px' }}></i>
+                                    Schemes & Subsidies
+                                </a>
+                                <ul className="dropdown-menu agriculture-card" style={{ border: 'none', marginTop: '8px' }}>
+                                    <li><Link to="/Sechemes" className="dropdown-item">
+                                        <i className="fa fa-file-text" style={{ marginRight: '8px', color: '#FFC107' }}></i>
+                                        Schemes
+                                    </Link></li>
+                                    <li><Link to="/Subsidies" className="dropdown-item">
+                                        <i className="fa fa-money" style={{ marginRight: '8px', color: '#FFC107' }}></i>
+                                        Subsidies
+                                    </Link></li>
+                                </ul>
+                            </li>
 
-                                        </ul>
-                                    </li>
+                            {localStorage.getItem("mydata") && (
+                                <li className="nav-item">
+                                    <Link to="/Myorders" className="nav-link">
+                                        <i className="fa fa-list-alt" style={{ marginRight: '8px' }}></i>
+                                        My Orders
+                                    </Link>
+                                </li>
+                            )}
 
-                                    <li><span>Schemes & Subsidies</span>
-                                        <ul>
-                                            <Link to="/Sechemes"><li><span>Schemes</span></li></Link>
-                                            <Link to="/Subsidies"> <li><span>Subsidies</span></li></Link>
-                                        </ul>
-                                    </li>
-                                    {localStorage.getItem("mydata")== null ?
-                                    <>
-                             
-                                    </>
+                            <li className="nav-item">
+                                <Link to="/About" className="nav-link">
+                                    <i className="fa fa-info-circle" style={{ marginRight: '8px' }}></i>
+                                    About Us
+                                </Link>
+                            </li>
 
-                                    :
-                                    <>
-                                    <li><Link to="/Myorders"><span>My Orders</span></Link></li>
-                                    </>
-                                    }
-                                    <li><Link to="/About"><span>About Us</span></Link></li>
-                                    <li><Link to="/Contactus"><span>Contact Us</span></Link></li>
-                                </ul>				</div>
-                        </div>
-                        <div class="clear"></div>
-
-                    </div>
+                            <li className="nav-item">
+                                <Link to="/Contactus" className="nav-link">
+                                    <i className="fa fa-phone" style={{ marginRight: '8px' }}></i>
+                                    Contact Us
+                                </Link>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
 
+            <style jsx>{`
+                .dropdown:hover .dropdown-menu {
+                    display: block;
+                    animation: fadeInUp 0.3s ease;
+                }
+                
+                .dropdown-menu {
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    z-index: 1000;
+                    min-width: 200px;
+                    padding: 8px 0;
+                    background: white;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 32px rgba(46, 125, 50, 0.1);
+                }
+                
+                .dropdown-item {
+                    display: block;
+                    width: 100%;
+                    padding: 12px 20px;
+                    clear: both;
+                    font-weight: 400;
+                    color: #2C3E50;
+                    text-decoration: none;
+                    white-space: nowrap;
+                    border: 0;
+                    transition: all 0.3s ease;
+                }
+                
+                .dropdown-item:hover {
+                    background: #E8F5E8;
+                    color: #2E7D32;
+                    transform: translateX(4px);
+                }
+                
+                @media (max-width: 768px) {
+                    .modern-nav ul {
+                        flex-direction: column;
+                    }
+                    
+                    .nav-link {
+                        text-align: center;
+                        padding: 12px 16px;
+                    }
+                    
+                    .dropdown-menu {
+                        position: static;
+                        display: block;
+                        width: 100%;
+                        margin-top: 0;
+                        box-shadow: none;
+                        background: #F5F5F5;
+                        border-radius: 8px;
+                        margin-bottom: 8px;
+                    }
+                }
+            `}</style>
         </>
     )
+}
 
-} export default Searchbar
+export default Searchbar

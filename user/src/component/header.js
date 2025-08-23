@@ -1,119 +1,112 @@
-import React, { useEffect ,useState} from 'react'
-import { Link, Router } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Searchbar from './searchbar'
 
 function Header() {
+    const [isScrolled, setIsScrolled] = useState(false);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
-    
-       
         <>
-     <div class="searchead"></div>
-        <div class="banner_bg_main">
-<Searchbar/>
-   
-       </div>
+            <div className={`modern-header ${isScrolled ? 'scrolled' : ''}`}>
+                <div className="container-modern">
+                    <div className="d-flex align-items-center justify-content-between" style={{ padding: '16px 0' }}>
+                        {/* Brand Logo */}
+                        <Link to="/" className="header-brand">
+                            <i className="fa fa-leaf" style={{ fontSize: '2rem', color: '#FFC107' }}></i>
+                            <span>Tech-Farm</span>
+                        </Link>
 
-             {/*   <div class="header_section">
-                    <div class="container">
-                        <div class="containt_main">
+                        {/* Quick Actions */}
+                        <div className="d-flex align-items-center" style={{ gap: '16px' }}>
+                            {/* Language Selector */}
+                            <select 
+                                className="form-control" 
+                                style={{ 
+                                    width: 'auto', 
+                                    padding: '8px 16px',
+                                    border: '2px solid rgba(255,255,255,0.3)',
+                                    background: 'rgba(255,255,255,0.2)',
+                                    color: 'white',
+                                    borderRadius: '25px'
+                                }}
+                            >
+                                <option value="en">English</option>
+                                <option value="hi">हिन्दी</option>
+                                <option value="gu">ગુજરાતી</option>
+                            </select>
 
-
-
-
-
-                      
-                            <div class="main">
-
-                                <div class="input-group">
-
-                                    <input type="text" class="form-control" placeholder="Search this blog" />
-                                    <div class="input-group-append">
-                                        <button class="srch" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="header_box">
-
-                                <div class="custom_menu">
-                                    <ul>
-
-
-
-                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                            <option selected>Engilsh</option>
-                                            <option value="1">हिन्दी</option>
-                                            <option value="2">ગુજરાતી</option>
-                                           
-                                        </select>
-                                    </ul>
-                                </div>
-
-                                <div class="login_menu">
-                                    <ul>
-                                        <li>
-                                            <Link to="/Login"><i class="fa fa-user" aria-hidden="true">Login</i></Link>
-
-                                        </li>
-                                        </ul>
-                                        <ul>
-                                         <li><a href="#">
-                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                        </a>
-                                        </li> 
-                                        </ul>
-                                  
-                                </div>
+                            {/* User Actions */}
+                            <div className="d-flex align-items-center" style={{ gap: '12px' }}>
+                                {localStorage.getItem("mydata") ? (
+                                    <>
+                                        <Link to="/Cart" className="btn-agriculture-outline" style={{ 
+                                            padding: '8px 16px',
+                                            fontSize: '14px',
+                                            background: 'rgba(255,255,255,0.2)',
+                                            border: '2px solid rgba(255,255,255,0.3)',
+                                            color: 'white'
+                                        }}>
+                                            <i className="fa fa-shopping-cart"></i>
+                                            <span className="ml-2">Cart</span>
+                                        </Link>
+                                        <Link to="/Profile" className="btn-agriculture" style={{ padding: '8px 16px', fontSize: '14px' }}>
+                                            <i className="fa fa-user"></i>
+                                            <span className="ml-2">Profile</span>
+                                        </Link>
+                                    </>
+                                ) : (
+                                    <Link to="/Login" className="btn-agriculture" style={{ padding: '8px 16px', fontSize: '14px' }}>
+                                        <i className="fa fa-sign-in"></i>
+                                        <span className="ml-2">Login</span>
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="container">
-                    <div class="header_section_top">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="custom_menu">
-                                    <ul>
-                                        <li> <a href="#">Home</a></li>
-                                        <li> <div class="menu">
-                                            <li><h6>Products & Equipments</h6>
-                                                <ul class="sub-menu">
-                                                    <li>Products</li>
-                                                    <li>Eqipmnents</li>
-                                                    <li>All items</li>
+                
+                {/* Search Bar Section */}
+                <div style={{ background: 'rgba(255,255,255,0.1)', padding: '20px 0' }}>
+                    <Searchbar />
+                </div>
+            </div>
 
-                                                </ul>
-                                            </li>
-                                        </div>
-                                        </li>
-                                        <li> <div class="menu">
-                                            <li><h6>Schemes & Subsidies</h6>
-                                                <ul class="sub-menu">
-                                                    <li>Schemes</li>
-                                                    <li>Subsidies</li>
-
-
-                                                </ul>
-                                            </li>
-                                        </div>
-                                        </li>
-                                        <li><a href="#">About Us</a></li>
-
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>*/}
-              
-
-
-
-
-            
+            <style jsx>{`
+                .modern-header {
+                    transition: all 0.3s ease;
+                    border-bottom: 1px solid rgba(255,255,255,0.1);
+                }
+                
+                .modern-header.scrolled {
+                    background: linear-gradient(135deg, rgba(46, 125, 50, 0.95) 0%, rgba(76, 175, 80, 0.95) 100%);
+                    backdrop-filter: blur(10px);
+                }
+                
+                .header-brand:hover {
+                    transform: translateY(-2px);
+                    transition: all 0.3s ease;
+                }
+                
+                @media (max-width: 768px) {
+                    .d-flex {
+                        flex-direction: column;
+                        gap: 16px;
+                    }
+                    
+                    .header-brand {
+                        font-size: 1.5rem;
+                    }
+                }
+            `}</style>
         </>
     )
 }

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech-Farm - Enhanced UI Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Agriculture Theme CSS - Modern & Attractive UI */
+        :root {
+            --primary-green: #2E7D32;
+            --secondary-green: #4CAF50;
+            --accent-green: #66BB6A;
+            --earth-brown: #5D4037;
+            --wheat-gold: #FFC107;
+            --sky-blue: #03A9F4;
+            --soft-cream: #FFF8E1;
+            --light-green: #E8F5E8;
+            --dark-text: #2C3E50;
+            --light-text: #7F8C8D;
+            --white: #FFFFFF;
+            --shadow: rgba(46, 125, 50, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--light-green) 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .modern-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            box-shadow: 0 4px 20px rgba(46, 125, 50, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 16px 0;
+        }
+
+        .container-modern {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .d-flex { display: flex; }
+        .align-items-center { align-items: center; }
+        .justify-content-between { justify-content: space-between; }
+        .justify-content-center { justify-content: center; }
+
+        .header-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-agriculture {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            border: none;
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-agriculture:hover {
+            background: linear-gradient(135deg, var(--secondary-green), var(--accent-green));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(76, 175, 80, 0.3);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.9), rgba(76, 175, 80, 0.8)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: var(--white);
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            padding: 24px 0;
+        }
+
+        .agriculture-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 32px var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+            padding: 30px;
+        }
+
+        .agriculture-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(46, 125, 50, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-green), var(--accent-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .feature-description {
+            color: var(--light-text);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 24px; }
+
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            padding: 80px 0;
+            color: var(--white);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .modern-footer {
+            background: linear-gradient(135deg, var(--earth-brown) 0%, var(--primary-green) 100%);
+            color: var(--white);
+            padding: 48px 24px 24px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--wheat-gold);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .product-grid { grid-template-columns: 1fr; }
+            .d-flex { flex-direction: column; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="modern-header">
+        <div class="container-modern">
+            <div class="d-flex align-items-center justify-content-between">
+                <a href="#" class="header-brand">
+                    <i class="fa fa-leaf" style="font-size: 2rem; color: #FFC107;"></i>
+                    <span>Tech-Farm</span>
+                </a>
+                <div class="d-flex align-items-center" style="gap: 16px;">
+                    <a href="#" class="btn-agriculture">
+                        <i class="fa fa-sign-in"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container-modern">
+            <div class="fade-in-up">
+                <h1 class="hero-title">
+                    Welcome to <span style="color: #FFC107;">Tech-Farm</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Empowering farmers with modern agriculture technology, expert knowledge, 
+                    and sustainable farming solutions for a greener tomorrow.
+                </p>
+                <div class="d-flex justify-content-center" style="gap: 20px; flex-wrap: wrap;">
+                    <a href="#" class="btn-agriculture" style="padding: 16px 32px; font-size: 1.1rem; background: linear-gradient(135deg, #FFC107, #FFB300);">
+                        <i class="fa fa-rocket"></i>
+                        <span>Explore Products</span>
+                    </a>
+                    <a href="#" class="btn-agriculture" style="padding: 14px 30px; font-size: 1.1rem; background: transparent; border: 2px solid #FFFFFF;">
+                        <i class="fa fa-play-circle"></i>
+                        <span>Watch Demo</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section-padding" style="background: #FFF8E1;">
+        <div class="container-modern">
+            <div class="text-center mb-4">
+                <h2 style="font-size: 2.5rem; font-weight: 700; color: #2E7D32; margin-bottom: 16px;">
+                    Why Choose Tech-Farm?
+                </h2>
+                <p style="font-size: 1.2rem; color: #7F8C8D; max-width: 600px; margin: 0 auto;">
+                    Discover the features that make us the leading platform for modern agriculture
+                </p>
+            </div>
+
+            <div class="product-grid" style="margin-top: 60px;">
+                <div class="agriculture-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fa fa-leaf"></i>
+                    </div>
+                    <h3 class="feature-title">Organic Solutions</h3>
+                    <p class="feature-description">
+                        Sustainable and eco-friendly farming practices that protect the environment while maximizing yield.
+                    </p>
+                </div>
+
+                <div class="agriculture-card fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #2196F3, #42A5F5);">
+                        <i class="fa fa-cogs"></i>
+                    </div>
+                    <h3 class="feature-title">Modern Equipment</h3>
+                    <p class="feature-description">
+                        Access to the latest agricultural machinery and tools to streamline your farming operations.
+                    </p>
+                </div>
+
+                <div class="agriculture-card fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #FF9800, #FFB74D);">
+                        <i class="fa fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="feature-title">Expert Knowledge</h3>
+                    <p class="feature-description">
+                        Learn from agricultural experts and stay updated with the latest farming techniques.
+                    </p>
+                </div>
+
+                <div class="agriculture-card fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #9C27B0, #BA68C8);">
+                        <i class="fa fa-mobile"></i>
+                    </div>
+                    <h3 class="feature-title">Smart Technology</h3>
+                    <p class="feature-description">
+                        Leverage IoT, AI, and mobile apps to monitor crops and optimize farming decisions.
+                    </p>
+                </div>
+
+                <div class="agriculture-card fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #FF5722, #FF8A65);">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Community Support</h3>
+                    <p class="feature-description">
+                        Connect with a network of farmers, share experiences, and get community support.
+                    </p>
+                </div>
+
+                <div class="agriculture-card fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #795548, #8D6E63);">
+                        <i class="fa fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Increased Yield</h3>
+                    <p class="feature-description">
+                        Proven methods and technologies that help you achieve better crop yields and profits.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container-modern">
+            <div class="d-flex justify-content-center" style="gap: 80px; flex-wrap: wrap;">
+                <div class="stat-item slide-in-right">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Happy Farmers</div>
+                </div>
+                <div class="stat-item slide-in-right" style="animation-delay: 0.2s;">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Products Available</div>
+                </div>
+                <div class="stat-item slide-in-right" style="animation-delay: 0.4s;">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+                <div class="stat-item slide-in-right" style="animation-delay: 0.6s;">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="modern-footer">
+        <div class="container-modern">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fa fa-leaf"></i> Tech-Farm</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 24px;">
+                        Empowering farmers with modern technology and sustainable solutions 
+                        for a greener, more productive future in agriculture.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Home</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Products</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Equipment</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 12px;">
+                        <i class="fa fa-phone"></i> +91 7283818506
+                    </p>
+                    <p style="color: rgba(255, 255, 255, 0.8);">
+                        <i class="fa fa-envelope"></i> techfarm@gmail.com
+                    </p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: 48px; padding-top: 24px; text-align: center;">
+                <p style="color: rgba(255, 255, 255, 0.8);">
+                    © 2025 Tech-Farm. All Rights Reserved. Made with ❤️ for farmers.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

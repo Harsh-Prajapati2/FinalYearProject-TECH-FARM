@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Searchbar from "../component/searchbar";
-
+import '../agriculture-theme.css';
 
 function Schemes(){
   const[list, Setlist]=useState([]);
@@ -72,43 +72,136 @@ useEffect(()=>{
 
     return(
 <>
-
-
-
 <Searchbar/>
-<h1 class="fashion_taital">Schemes  </h1>
+<div className="agriculture-container">
+  <div className="hero-section" style={{
+    background: 'linear-gradient(135deg, var(--agriculture-primary), var(--agriculture-secondary))',
+    padding: '60px 20px',
+    textAlign: 'center',
+    color: 'white',
+    marginBottom: '40px'
+  }}>
+    <h1 className="agriculture-title" style={{fontSize: '3rem', marginBottom: '20px'}}>
+      Government Schemes for Farmers
+    </h1>
+    <p style={{fontSize: '1.2rem', opacity: '0.9'}}>
+      Comprehensive schemes to support and empower the farming community
+    </p>
+  </div>
 
-{list.map((val)=>{
-  return(
-    <>
-  
-<div class="card mb-3">
-        <div class="row g-0">
-          <div class="col-md-4">
-         
-          <div class="listpostimg">
+  <div className="schemes-grid" style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+    gap: '30px',
+    padding: '0 20px',
+    maxWidth: '1200px',
+    margin: '0 auto'
+  }}>
+    {list.map((val)=>{
+      return(
+        <div key={val._id} className="agriculture-card scheme-card" style={{
+          background: 'white',
+          borderRadius: '12px',
+          overflow: 'hidden',
+          boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
+          transition: 'all 0.3s ease',
+          border: '2px solid transparent'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-8px)';
+          e.currentTarget.style.borderColor = 'var(--agriculture-primary)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.borderColor = 'transparent';
+        }}>
+          
+          <div className="scheme-image" style={{
+            height: '200px',
+            overflow: 'hidden',
+            position: 'relative'
+          }}>
             <img 
-              src={`https://via.placeholder.com/300x200/4CAF50/white?text=${encodeURIComponent(val.post_title.substring(0, 20))}`} 
+              src={`https://via.placeholder.com/400x200/4CAF50/white?text=${encodeURIComponent(val.post_title.substring(0, 20))}`} 
               alt={val.post_title}
-              style={{width: '100%', height: '200px', objectFit: 'cover'}}
+              style={{
+                width: '100%', 
+                height: '100%', 
+                objectFit: 'cover',
+                transition: 'transform 0.3s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
             />
-          </div> 
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <Link to="/Mainschemes" state={{scsb:val._id}} >
-                <h5 class="card-title">{val.post_title}</h5>
-                <p class="card-text">{val.post_decrisption.substring(0, 270)}...</p>
-                <span class="badge bg-primary">{val.scheme_type}</span>
-              </Link>
+            <div style={{
+              position: 'absolute',
+              top: '15px',
+              right: '15px',
+              background: 'var(--agriculture-accent)',
+              color: 'white',
+              padding: '5px 12px',
+              borderRadius: '20px',
+              fontSize: '0.85rem',
+              fontWeight: '600'
+            }}>
+              {val.scheme_type}
             </div>
           </div>
+          
+          <div style={{ padding: '25px' }}>
+            <Link 
+              to="/Mainschemes" 
+              state={{schemeData: val}} 
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <h3 style={{
+                color: 'var(--agriculture-primary)',
+                marginBottom: '15px',
+                fontSize: '1.3rem',
+                fontWeight: '600',
+                lineHeight: '1.4'
+              }}>
+                {val.post_title}
+              </h3>
+              
+              <p style={{
+                color: '#666',
+                lineHeight: '1.6',
+                marginBottom: '20px',
+                fontSize: '0.95rem'
+              }}>
+                {val.post_decrisption.substring(0, 150)}...
+              </p>
+              
+              <div className="agriculture-btn btn-primary" style={{
+                display: 'inline-block',
+                padding: '12px 24px',
+                background: 'var(--agriculture-primary)',
+                color: 'white',
+                borderRadius: '25px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                transition: 'all 0.3s ease',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'var(--agriculture-secondary)';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'var(--agriculture-primary)';
+                e.target.style.transform = 'translateY(0)';
+              }}>
+                Learn More →
+              </div>
+            </Link>
+          </div>
         </div>
-      </div>
-
-      </>
-  )
-})}
+      )
+    })}
+  </div>
+</div>
 </>
     )
 

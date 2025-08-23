@@ -1,0 +1,570 @@
+/* Agriculture Theme CSS - Modern & Attractive UI */
+
+:root {
+  /* Agriculture Color Palette */
+  --primary-green: #2E7D32;        /* Deep Green */
+  --secondary-green: #4CAF50;      /* Bright Green */
+  --accent-green: #66BB6A;         /* Light Green */
+  --earth-brown: #5D4037;          /* Rich Brown */
+  --wheat-gold: #FFC107;           /* Golden Yellow */
+  --sky-blue: #03A9F4;             /* Fresh Blue */
+  --soft-cream: #FFF8E1;           /* Cream Background */
+  --light-green: #E8F5E8;          /* Very Light Green */
+  --dark-text: #2C3E50;            /* Dark Text */
+  --light-text: #7F8C8D;           /* Light Gray Text */
+  --white: #FFFFFF;
+  --shadow: rgba(46, 125, 50, 0.1);
+  --border-radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--soft-cream) 0%, var(--light-green) 100%);
+  color: var(--dark-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Modern Card Design */
+.agriculture-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: var(--transition);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.agriculture-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(46, 125, 50, 0.2);
+}
+
+/* Modern Button Styles */
+.btn-agriculture {
+  background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+  border: none;
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: var(--transition);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-agriculture:hover {
+  background: linear-gradient(135deg, var(--secondary-green), var(--accent-green));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.3);
+  color: var(--white);
+}
+
+.btn-agriculture-outline {
+  background: transparent;
+  border: 2px solid var(--primary-green);
+  color: var(--primary-green);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.btn-agriculture-outline:hover {
+  background: var(--primary-green);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* Modern Header Styles */
+.modern-header {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  box-shadow: 0 4px 20px rgba(46, 125, 50, 0.15);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-brand:hover {
+  color: var(--wheat-gold);
+}
+
+/* Modern Navigation */
+.modern-nav {
+  background: var(--white);
+  box-shadow: 0 2px 20px var(--shadow);
+  border-radius: var(--border-radius);
+  margin: 20px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav-item {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-link {
+  color: var(--dark-text);
+  text-decoration: none;
+  padding: 16px 24px;
+  display: block;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
+  transition: var(--transition);
+  transform: translateX(-50%);
+}
+
+.nav-link:hover {
+  color: var(--primary-green);
+  background: var(--light-green);
+}
+
+.nav-link:hover::before {
+  width: 80%;
+}
+
+/* Modern Search Bar */
+.modern-search {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 24px 16px 56px;
+  border: 2px solid rgba(46, 125, 50, 0.2);
+  border-radius: 50px;
+  font-size: 16px;
+  transition: var(--transition);
+  background: var(--white);
+  color: var(--dark-text);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--light-text);
+  font-size: 18px;
+}
+
+.search-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--primary-green);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: var(--white);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.search-btn:hover {
+  background: var(--secondary-green);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Modern Sidebar */
+.modern-sidebar {
+  background: linear-gradient(180deg, var(--white) 0%, var(--light-green) 100%);
+  box-shadow: 4px 0 20px var(--shadow);
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  padding: 24px 0;
+  min-height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  z-index: 999;
+  transform: translateX(-100%);
+  transition: var(--transition);
+}
+
+.modern-sidebar.active {
+  transform: translateX(0);
+}
+
+.sidebar-brand {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(46, 125, 50, 0.1);
+  margin-bottom: 20px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-nav-item {
+  margin: 8px 16px;
+}
+
+.sidebar-nav-link {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  color: var(--dark-text);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  gap: 16px;
+  font-weight: 500;
+}
+
+.sidebar-nav-link:hover {
+  background: var(--primary-green);
+  color: var(--white);
+  transform: translateX(8px);
+}
+
+.sidebar-nav-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 24px;
+}
+
+.product-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px var(--shadow);
+  transition: var(--transition);
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(46, 125, 50, 0.2);
+}
+
+.product-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-content {
+  padding: 24px;
+}
+
+.product-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.product-description {
+  color: var(--light-text);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+/* Modern Forms */
+.modern-form {
+  background: var(--white);
+  padding: 32px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px var(--shadow);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.form-control {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid rgba(46, 125, 50, 0.2);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  transition: var(--transition);
+  background: var(--white);
+  color: var(--dark-text);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+}
+
+/* Loading Animation */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--light-green);
+  border-top: 4px solid var(--primary-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Modern Footer */
+.modern-footer {
+  background: linear-gradient(135deg, var(--earth-brown) 0%, var(--primary-green) 100%);
+  color: var(--white);
+  padding: 48px 24px 24px;
+  margin-top: 80px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section h3 {
+  color: var(--wheat-gold);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: var(--transition);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.footer-link:hover {
+  color: var(--wheat-gold);
+  transform: translateX(4px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+  
+  .modern-sidebar {
+    width: 100%;
+    border-radius: 0;
+  }
+  
+  .modern-nav {
+    margin: 10px;
+  }
+  
+  .nav-link {
+    padding: 12px 16px;
+  }
+  
+  .modern-form {
+    padding: 24px 16px;
+    margin: 16px;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+/* Utility Classes */
+.text-agriculture {
+  color: var(--primary-green);
+}
+
+.bg-agriculture {
+  background: var(--primary-green);
+}
+
+.border-agriculture {
+  border-color: var(--primary-green);
+}
+
+.container-modern {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-padding {
+  padding: 80px 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-4 {
+  margin-bottom: 24px;
+}
+
+.mt-4 {
+  margin-top: 24px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+/* Agriculture-specific Icons */
+.icon-agriculture {
+  font-size: 2rem;
+  color: var(--secondary-green);
+  margin-bottom: 16px;
+}
+
+/* Modern Badge */
+.badge-agriculture {
+  background: linear-gradient(135deg, var(--wheat-gold), #FFB300);
+  color: var(--white);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Glassmorphism Effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--border-radius);
+}

@@ -24,7 +24,7 @@ var onSubmit =  ( currentval,_id ,titl,num,upload_date,u_email,primg,p_name,p_mo
   var options = {
     "key": "rzp_test_znsgOy5truI7Xv",
     "amount": famt * 100, // 2000 paise = INR 20
-    "name": "Grow Smart",
+    "name": "Tech-Farm",
     "description": titl,
     "currency": "INR",
     "netbanking": true,

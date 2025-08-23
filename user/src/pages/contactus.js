@@ -47,10 +47,10 @@ function Contactus() {
                                 <ul class="list-unstyled pl-md-5 mb-5">
                                     <li class="d-flex text-black mb-2">
                                         <span class="mr-3">Address:
-                                        </span> 34 Grow Smart Ltd, Ankelshwar-393001,Gujarat India
+                                        </span> 34 Tech-Farm Ltd, Ankelshwar-393001,Gujarat India
                                     </li>
                                     <li class="d-flex text-black mb-2"><span class="mr-3">Phone:</span> +91 7283818506</li>
-                                    <li class="d-flex text-black"><span class="mr-3">Email:</span> growsmartmsu@gmail.com </li>
+                                    <li class="d-flex text-black"><span class="mr-3">Email:</span> techfarm@gmail.com </li>
                                 </ul>
                             </div>
                         </div>

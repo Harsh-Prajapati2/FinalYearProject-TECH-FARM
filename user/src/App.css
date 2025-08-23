@@ -1,5 +1,9 @@
+@import './styles/agriculture-theme.css';
+
 .App {
-  text-align: center;
+  text-align: left;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FFF8E1 0%, #E8F5E8 100%);
 }
 
 .App-logo {
@@ -14,7 +18,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: linear-gradient(135deg, #2E7D32, #4CAF50);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,10 +26,12 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 20px;
+  border-radius: 0 0 20px 20px;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #66BB6A;
 }
 
 @keyframes App-logo-spin {
@@ -34,5 +40,23 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Main content area */
+#page-content {
+  margin-left: 0;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+#page-content.sidebar-open {
+  margin-left: 280px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #page-content.sidebar-open {
+    margin-left: 0;
   }
 }
