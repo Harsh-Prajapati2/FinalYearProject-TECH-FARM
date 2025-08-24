@@ -79,7 +79,7 @@ function About() {
                   <div className="box_main">
                     <div className="aboutimg">
                       <img
-                        src="./resource/images/aboutus/my-passport-photo.jpg"
+                        src="./resource/images/aboutus/jaymin.jpeg"
                         className="storyimg"
                         alt="Safwan Patel"
                         onError={(e) => handleImageError(e, 'Safwan Patel')}
@@ -115,7 +115,7 @@ function About() {
                   <div className="box_main">
                     <div className="aboutimg">
                       <img
-                        src="./resource/images/aboutus/my-passport-photo.jpg"
+                        src="./resource/images/aboutus/jaypadhiyar.jpg"
                         className="storyimg"
                         alt="Harsh Prajapati"
                         onError={(e) => handleImageError(e, 'Harsh Prajapati')}

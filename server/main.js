@@ -1566,12 +1566,12 @@ console.log(pwd);
                   port: 587,
                   secure: false,
                   auth: {
-                    user: "growsmartmsu@gmail.com",
+                    user: "techfarm@gmail.com",
                     pass: "oqbuwpswuawsnslg",
                   },
                 });
                 const message = {
-                  from: "growsmartmsu@gmail.com",
+                  from: "techfarm@gmail.com",
                   to: u_email,//email id
                 
                   subject: "HMS",
