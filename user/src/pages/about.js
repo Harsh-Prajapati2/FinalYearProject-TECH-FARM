@@ -79,7 +79,7 @@ function About() {
                   <div className="box_main">
                     <div className="aboutimg">
                       <img
-                        src="./resource/images/aboutus/jaymin.jpeg"
+                        src="./resource/images/aboutus/safwanpatel.jpg"
                         className="storyimg"
                         alt="Safwan Patel"
                         onError={(e) => handleImageError(e, 'Safwan Patel')}
@@ -115,7 +115,7 @@ function About() {
                   <div className="box_main">
                     <div className="aboutimg">
                       <img
-                        src="./resource/images/aboutus/jaypadhiyar.jpg"
+                       src="./resource/images/aboutus/harshprajapati.jpg"
                         className="storyimg"
                         alt="Harsh Prajapati"
                         onError={(e) => handleImageError(e, 'Harsh Prajapati')}
@@ -157,21 +157,6 @@ function About() {
                         onError={(e) => handleImageError(e, 'Jay Padhiyar')}
                         onLoad={() => console.log('Jay image loaded successfully')}
                       />
-                      <div
-                        className="member-placeholder"
-                        style={{
-                          height: '200px',
-                          background: 'linear-gradient(135deg, #4CAF50, #45a049)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '4rem',
-                          color: 'white',
-                          borderRadius: '10px',
-                        }}
-                      >
-                        👨‍💻
-                      </div>
                     </div>
                     <h3>Jay Padhiyar</h3>
                     <h6>Web Developer</h6>
@@ -187,27 +172,12 @@ function About() {
                   <div className="box_main">
                     <div className="aboutimg">
                       <img
-                        src="./resource/images/aboutus/jaymin.jpeg"
+                        src="./resource/images/aboutus/jayminmakwana.jpg"
                         className="storyimg"
                         alt="Jaymin Makwana"
                         onError={(e) => handleImageError(e, 'Jaymin Makwana')}
                         onLoad={() => console.log('Jaymin image loaded successfully')}
                       />
-                      <div
-                        className="member-placeholder"
-                        style={{
-                          height: '200px',
-                          background: 'linear-gradient(135deg, #4CAF50, #45a049)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '4rem',
-                          color: 'white',
-                          borderRadius: '10px',
-                        }}
-                      >
-                        👨‍💼
-                      </div>
                     </div>
                     <h3>Jaymin Makwana</h3>
                     <h6>Web Developer</h6>
@@ -274,11 +244,27 @@ function About() {
           margin-bottom: 20px;
         }
 
+        .aboutimg {
+          width: 100%;
+          height: 300px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          border-radius: 10px;
+          margin-bottom: 20px;
+        }
+
         .storyimg {
           width: 100%;
-          height: 200px;
+          height: 300px;
           object-fit: cover;
           border-radius: 10px;
+          transition: transform 0.3s ease;
+        }
+
+        .storyimg:hover {
+          transform: scale(1.05);
         }
 
         .box_main h3 {

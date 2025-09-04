@@ -44,6 +44,25 @@ function Header() {
                                 <option value="gu">ગુજરાતી</option>
                             </select>
 
+                            {/* Search Button */}
+                            <button
+                                className="btn-agriculture-outline"
+                                style={{ 
+                                    padding: '8px 16px',
+                                    fontSize: '14px',
+                                    background: 'rgba(255,255,255,0.2)',
+                                    border: '2px solid rgba(255,255,255,0.3)',
+                                    color: 'white',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px'
+                                }}
+                                onClick={() => document.querySelector('.search-trigger-btn').click()}
+                            >
+                                <i className="fa fa-search"></i>
+                                <span>Search</span>
+                            </button>
+
                             {/* User Actions */}
                             <div className="d-flex align-items-center" style={{ gap: '12px' }}>
                                 {localStorage.getItem("mydata") ? (

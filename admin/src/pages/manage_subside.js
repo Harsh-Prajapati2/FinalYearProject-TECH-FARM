@@ -1,219 +1,242 @@
 import React, { useEffect, useState } from "react";
 import Axios from 'axios';
-// import { link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import './style/ManageSubside.css';
 
+function Manage_subside() {
+  const navigate = useNavigate();
+  const [list, setList] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editSubside, setEditSubside] = useState(null);
 
-function  Manage_subside() {
+  const showNotification = (message, isSuccess = true) => {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px 24px;
+      border-radius: 8px;
+      background-color: ${isSuccess ? '#4caf50' : '#f44336'};
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 30000;
+      animation: slideIn 0.3s ease;
+    `;
+    notification.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 20px;">${isSuccess ? '✓' : '✕'}</span>
+        <span>${message}</span>
+      </div>
+    `;
+    document.body.appendChild(notification);
 
-  const closemodal=(e) =>{
-    window.location="/Manage_subside";
-  
-  }
-  
-  const onupdate=(e) =>{
-  
-  e.preventDefault();
-  const id=document.getElementById('id').value;
-  const post_title1=document.getElementById('post_title1').value;
-  const post_description1=document.getElementById('post_description1').value;
-  const post_description_etc=document.getElementById('post_description_etc').value;
-  const post_subtitle1=document.getElementById('post_subtitle1').value;
-  const post_subdescription1=document.getElementById('post_subdescription1').value;
-  Axios.post('http://localhost:1137/api/updated_scheme',{id:id,post_title1:post_title1,post_description1:post_description1,post_description_etc:post_description_etc,post_subtitle1:post_subtitle1,post_subdescription1:post_subdescription1}).then((response)=>{
-  
-  window.location="/Manage_subside";
-  });
-  }
-  
-  
-  const[list, setlist] = useState([]);
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease';
+      setTimeout(() => document.body.removeChild(notification), 300);
+    }, 3000);
+  };
+
+  const onupdate = (e) => {
+    e.preventDefault();
+    Axios.post('http://localhost:1137/api/updated_scheme', {
+      id: editSubside._id,
+      post_title1: e.target.post_title1.value,
+      post_description1: e.target.post_description1.value,
+      post_description_etc: e.target.post_description_etc.value,
+      post_subtitle1: e.target.post_subtitle1.value,
+      post_subdescription1: e.target.post_subdescription1.value
+    }).then(() => {
+      showNotification("Subside scheme updated successfully!");
+      closeModal();
+      fetchSubsides();
+    }).catch(() => {
+      showNotification("Error updating subside scheme. Please try again.", false);
+    });
+  };
   
   
   useEffect(() => {
-  Axios.get('http://localhost:1137/api/subside_fetch',
-  {
-  
-  }).then((response) => 
-  {
-  setlist(response.data);
-  });
-  },[]);
-  
-  
-  const[rs,setlist1]=useState([]);
-  
-  const showDetail = (id) =>
-  {
-  
-  
-  Axios.post('http://localhost:1137/api/get_subside_fetch',{id:id}).then((response)=>{
-  
-  setlist1(response.data);
-  });
-  }
+    fetchSubsides();
+  }, []);
+
+  const fetchSubsides = () => {
+    Axios.get('http://localhost:1137/api/subside_fetch').then(response => {
+      setList(response.data);
+    });
+  };
+
+  const openEditModal = (id) => {
+    Axios.post('http://localhost:1137/api/get_subside_fetch', { id: id }).then(response => {
+      setEditSubside(response.data[0]);
+      setModalOpen(true);
+    });
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setEditSubside(null);
+  };
    
   const postdelete = (id) => {
-    alert("Deleted!!!!");
-    window.location = "/Manage_subside"  
-    Axios.post('http://localhost:1137/api/delete_button',
-    {
-      id:id
-      
-      }).then((response) => {
-               
-        alert("done");
-  });
-}
+    const confirmDelete = () => {
+      const modalOverlay = document.createElement('div');
+      modalOverlay.className = 'modal-overlay';
+      modalOverlay.style.zIndex = '30000';
+
+      const confirmBox = document.createElement('div');
+      confirmBox.className = 'modal-content';
+      confirmBox.style.maxWidth = '400px';
+      confirmBox.innerHTML = `
+        <div class="modal-header" style="margin-bottom: 16px;">
+          <h5>Confirm Delete</h5>
+        </div>
+        <p style="margin-bottom: 24px;">Are you sure you want to delete this subside scheme? This action cannot be undone.</p>
+        <div class="modal-buttons">
+          <button class="btn btn-secondary">Cancel</button>
+          <button class="btn btn-delete">Delete</button>
+        </div>
+      `;
+
+      modalOverlay.appendChild(confirmBox);
+      document.body.appendChild(modalOverlay);
+
+      return new Promise((resolve) => {
+        const [cancelBtn, deleteBtn] = confirmBox.querySelectorAll('button');
+        
+        cancelBtn.onclick = () => {
+          document.body.removeChild(modalOverlay);
+          resolve(false);
+        };
+
+        deleteBtn.onclick = () => {
+          document.body.removeChild(modalOverlay);
+          resolve(true);
+        };
+
+        modalOverlay.onclick = (e) => {
+          if (e.target === modalOverlay) {
+            document.body.removeChild(modalOverlay);
+            resolve(false);
+          }
+        };
+      });
+    };
+
+    confirmDelete().then(confirmed => {
+      if (confirmed) {
+        Axios.post('http://localhost:1137/api/delete_button', { id: id })
+          .then(() => {
+            showNotification('Subside scheme deleted successfully!');
+            fetchSubsides();
+          })
+          .catch(() => {
+            showNotification('Error during deletion. Please try again.', false);
+          });
+      }
+    });
+  };
   
 
 return (
-  <>
-
-    <main id="main" class="main">
-      <section class="section">
-      <div class="row">
-        
-             <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Manage Subside</h5>
-                
-
-
-                <table class="table datatable">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Title</th>  
-                      <th scope="col">Description</th> 
-                      <th scope="col">Sub-Title</th>  
-                      <th scope="col">Sub-Description</th>
-                      <th scope="col">Upload Date</th> 
-                      <th scope="col">Edit Post</th>                            
-                      <th scope="col">Delete Post</th>
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    {list.map((val,index) => {
-
-                      return (
-
-                        <tr>
-                          <td>{index+1}</td>
-                          <td><input type="text" name="title" readOnly value={val.post_title} style={{width:"200px"}}/></td>
-                          <td><textarea rows="7" readOnly style={{width:"350px"}}>{val.post_decrisption}</textarea></td>
-                          <td><input type="text" name="sutitle" readOnly value={val.post_subtitle} style={{width:"200px"}}/></td>
-                          <td><textarea rows="7" readOnly style={{width:"350px"}}>{val.post_subdecrisption}</textarea></td>
-                          <td>{val.post_upload_date}</td>
-                          <td>
-                          <button type="button" class="btn btn-outline-secondary" onClick={()=>showDetail(val._id)}   data-target="#myModal" data-toggle="modal">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
-                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
-                            </svg>
-                          </button>
-                            </td>
-                          <td>
-                          <button type="button" class="btn btn-outline-secondary" onClick={(e)=>postdelete(val._id)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"></path>
-                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"></path>
-                          </svg>
-                          </button>
-                          </td>
-                        </tr>
-                      )
-                    })
-                    }
-
-
-                  </tbody>
-                </table>
-
-              </div>
-            </div>
-
-          
-        </div>
-      
-        
-      </section>
-
-    </main>
-
-{/* modal */}
-<div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                
-                {rs.map((val1) => {
-
-                  return (
-                    <>
-                    <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Manage Subside</h4>
-                                    
-                                    <div class="basic-form">
-                                    <input type="text" value={val1._id} id="id" hidden />
-                                            
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>Title:</label>
-                                                    <input type="text" defaultValue={val1.post_title} class="form-control" id="post_title1" />
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>Description:</label>
-                                                    <input type="text" defaultValue={val1.post_decrisption} class="form-control" id="post_description1"  />
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Extra-description:</label>
-                                                    <input type="text" defaultValue={val1.post_decrisption} class="form-control" id="post_description_etc" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Subtitle:</label>
-                                                <input type="text" defaultValue={val1.post_subtitle} class="form-control" id="post_subtitle1" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Subdescription:</label>
-                                                <input type="text" defaultValue={val1.post_subdecrisption} class="form-control" id="post_subdescription1" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Browse Files:</label>
-                                                <input type="textarea" defaultValue={val1.post_file} class="form-control" id="post_file1" />
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                            </div>
-                                            
-                                            
-                                      
-                                    </div>
-                                </div>
-                            </div>
-                    </>
-            )})}
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" onClick={closemodal}  >Close</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal" onClick={onupdate}  >Update</button>
+    <div className="main-page-wrapper">
+      <main className="main manage-subside-container">
+        <section className="section">
+          <div className="header-row flex-row-space-between">
+            <h2>Manage Subside Schemes</h2>
+            <div className="button-count-container">
+              <button className="add-subside-btn" onClick={() => setModalOpen('upload')}>
+                + Upload Subside Scheme
+              </button>
+              <span className="scheme-count">
+                Total Schemes: {list.length}
+              </span>
             </div>
           </div>
 
+          <div className="card">
+            <div className="card-body">
+              <table className="subside-table">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Sub-Title</th>
+                    <th>Sub-Description</th>
+                    <th>Upload Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {list.map((val, index) => (
+                    <tr key={val._id}>
+                      <td>{index + 1}</td>
+                      <td><input type="text" readOnly value={val.post_title} className="input-title" /></td>
+                      <td><textarea readOnly rows={4} className="textarea-description" value={val.post_decrisption || ''} /></td>
+                      <td><input type="text" readOnly value={val.post_subtitle} className="input-subtitle" /></td>
+                      <td><textarea readOnly rows={4} className="textarea-subdescription" value={val.post_subdecrisption || ''} /></td>
+                      <td>{val.post_upload_date}</td>
+                      <td>
+                        <button className="btn btn-edit" onClick={() => openEditModal(val._id)}>
+                          Edit
+                        </button>
+                      </td>
+                      <td>
+                        <button className="btn btn-delete" onClick={() => postdelete(val._id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Edit Modal */}
+      {modalOpen === true && editSubside && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h5>Edit Subside Scheme</h5>
+              <button className="close-btn" onClick={closeModal}>&times;</button>
+            </div>
+            <form className="edit-form" onSubmit={onupdate}>
+              <input type="hidden" name="id" value={editSubside._id} />
+              <div className="form-group">
+                <label>Title:</label>
+                <input type="text" name="post_title1" defaultValue={editSubside.post_title} required />
+              </div>
+              <div className="form-group">
+                <label>Description:</label>
+                <textarea name="post_description1" defaultValue={editSubside.post_decrisption} required rows={3} />
+              </div>
+              <div className="form-group">
+                <label>Extra Description:</label>
+                <textarea name="post_description_etc" defaultValue={editSubside.post_decrisption_etc} rows={2} />
+              </div>
+              <div className="form-group">
+                <label>Sub Title:</label>
+                <input type="text" name="post_subtitle1" defaultValue={editSubside.post_subtitle} required />
+              </div>
+              <div className="form-group">
+                <label>Sub Description:</label>
+                <textarea name="post_subdescription1" defaultValue={editSubside.post_subdecrisption} required rows={3} />
+              </div>
+              <div className="modal-buttons">
+                <button type="button" onClick={closeModal}>Cancel</button>
+                <button type="submit">Update</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-  </>
+      )}
+    </div>
+  );
+}
 
-
-);
-
-} export default Manage_subside;
+export default Manage_subside;

@@ -1,76 +1,77 @@
-
-import React from "react";
-import { useState, useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Searchbar from "../component/searchbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "./css/myorder.css";
 
 function Myorders() {
-    const [list, setlist] = useState([]);
-    let user = JSON.parse(localStorage.getItem("mydata"));
-const u_email = user.u_email
-    useEffect(() => {
-        
+  const [list, setList] = useState([]);
+  let user = JSON.parse(localStorage.getItem("mydata")); 
+  const navigate = useNavigate();
+  const u_email = user?.u_email;
 
-        Axios.get('http://localhost:1137/api/myorders', {
-            params: { u_email: u_email }
-        }).then((response) => {
-            setlist(response.data);
-        })
-    }, [])
+  useEffect(() => {
+    if (u_email) {
+      Axios.get("http://localhost:1137/api/myorders", {
+        params: { u_email: u_email },
+      }).then((response) => {
+        setList(response.data);
+      });
+    }
+  }, [u_email]);
 
+  const handleProductClick = (productId) => {
+    navigate("/Mainpost", { state: { pl: productId } });
+  };
 
+  return (
+    <>
+      <Searchbar />
+      <h1 className="orders-title">My Orders</h1>
 
-	return (
-		<>
-		<Searchbar/>
-			<h1> My Orders </h1>
-			{list.map((val) => {
-				return (
+      <div className="orders-container">
+        {list.map((val) => (
+          <div className="order-card" key={val._id} onClick={() => handleProductClick(val.product_id)} style={{ cursor: 'pointer' }}>
+            <div className="order-img">
+              <img
+                src={`http://localhost:1137/public/${val.post_img}`}
+                alt={val.product_title}
+              />
+            </div>
 
-					<>
-						<div class="card mb-3">
-							<div class="row g-0">
-								<div class="col-md-2">
+            <div className="order-details">
+              <h3 className="product-title">{val.product_title}</h3>
+              <div className="order-info">
+                <p>
+                  <span>Quantity:</span> {val.number_of_products}
+                </p>
+                <p>
+                  <span>Price:</span> ₹{val.price_of_product}
+                </p>
+                <p>
+                  <span>Purchase Date:</span> {val.purchase_date}
+                </p>
+              </div>
 
-								
-								<img  class=" cartimg"src={"http://localhost:1137/public/"+val.post_img} alt="imagepost"/>
-								</div>
-								<div class="col-md-10">
-									<div class="card-body">
-									
-										<h5 class="card-title">{val.product_title}</h5>
-										<div class="order">
-											ProductQty:<input type="text" class="mainvalue" id="orgval" value={val.number_of_products } />
+              <Link to="/Recipe" state={{ orid: val.product_id }} onClick={(e) => e.stopPropagation()}>
+                <button className="invoice-btn">View Invoice</button>
+              </Link>
+              
+              <button 
+                className="view-product-btn" 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleProductClick(val.product_id);
+                }}
+              >
+                View Product Details
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
 
-											
-											Price: <input type="text" class="incrval" id="noofval" value={val.price_of_product}  />
-											
-
-
-											Date of purchase:<input type="text" class="mainvalue" id="productval" value={val.purchase_date}  />
-
-											<Link to="/Recipe" state={{orid:val.product_id}}><button class="deletebtn" id="btnincrement">&#128424; </button></Link>
-										</div>
-										{/* <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> */}
-
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-				   </>
-				)
-
-			})}
-
-						
-					
-					</>
-	)	
-   
-			
-		        
-            }export default Myorders
+export default Myorders;

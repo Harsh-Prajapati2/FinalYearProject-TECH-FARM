@@ -1,11 +1,46 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import "./mainhead.css"
 
 function Mainhead() {
     const [showProductsDropdown, setShowProductsDropdown] = useState(false);
     const [showSchemesDropdown, setShowSchemesDropdown] = useState(false);
+    
+    // Handle clicking outside dropdowns
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (!event.target.closest('.dropdown-toggle')) {
+                setShowProductsDropdown(false);
+                setShowSchemesDropdown(false);
+            }
+        }
+        
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
+    // Remove hover handlers as we're using click instead
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (!event.target.closest('.dropdown-toggle')) {
+                setShowProductsDropdown(false);
+                setShowSchemesDropdown(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+    // Click outside to close dropdowns
+    React.useEffect(() => {
+        function handleClickOutside(event) {
+            if (!event.target.closest('.dropdown-toggle') && !event.target.closest('.sub-menu')) {
+                setShowProductsDropdown(false);
+                setShowSchemesDropdown(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
     return (
         <>
             {/* Top Navigation Section */}
@@ -37,37 +72,51 @@ function Mainhead() {
                                             fontSize: '16px',
                                             padding: '12px 16px',
                                             borderRadius: '6px',
-                                            transition: 'all 0.3s ease'
-                                        }}>Home</Link>
-                                    </li>
-                                    
-                                    {/* Products & Equipments Dropdown */}
-                                    <li style={{ position: 'relative' }}
-                                        onMouseEnter={() => setShowProductsDropdown(true)}
-                                        onMouseLeave={() => setShowProductsDropdown(false)}>
-                                        <a href="#" style={{
-                                            color: '#FFFFFF',
-                                            textDecoration: 'none',
-                                            fontWeight: '500',
-                                            fontSize: '16px',
-                                            padding: '12px 16px',
-                                            borderRadius: '6px',
                                             transition: 'all 0.3s ease',
                                             display: 'flex',
                                             alignItems: 'center',
-                                            background: showProductsDropdown ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
+                                            gap: '8px'
                                         }}>
+                                            <i className="fas fa-home"></i>
+                                            Home
+                                        </Link>
+                                    </li>
+                                    {/* Products & Equipments Dropdown */}
+                                    <li style={{ position: 'relative' }}>
+                                        <button
+                                            className="dropdown-toggle"
+                                            onClick={() => {
+                                                setShowSchemesDropdown(false);
+                                                setShowProductsDropdown(!showProductsDropdown);
+                                            }}
+                                            style={{
+                                                color: '#FFFFFF',
+                                                background: showProductsDropdown ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                                                textDecoration: 'none',
+                                                fontWeight: '500',
+                                                fontSize: '16px',
+                                                padding: '12px 16px',
+                                                borderRadius: '6px',
+                                                transition: 'all 0.3s ease',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                border: 'none',
+                                                cursor: 'pointer'
+                                            }}
+                                            /* onClick handled above */
+                                            aria-expanded={showProductsDropdown}
+                                        >
+                                            <i className="fas fa-tractor" style={{ marginRight: '8px' }}></i>
                                             Products & Equipment
                                             <i className="fa fa-chevron-down" style={{
-                                                marginLeft: '5px', 
+                                                marginLeft: '5px',
                                                 fontSize: '12px',
                                                 transform: showProductsDropdown ? 'rotate(180deg)' : 'rotate(0deg)',
                                                 transition: 'transform 0.3s ease'
                                             }}></i>
-                                        </a>
-                                        
+                                        </button>
                                         {showProductsDropdown && (
-                                            <ul style={{
+                                            <div className="sub-menu show" style={{
                                                 position: 'absolute',
                                                 top: '100%',
                                                 left: '0',
@@ -75,106 +124,83 @@ function Mainhead() {
                                                 minWidth: '220px',
                                                 boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
                                                 borderRadius: '8px',
-                                                padding: '8px 0',
-                                                listStyle: 'none',
-                                                margin: '0',
+                                                padding: '16px',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'center',
+                                                gap: '12px',
                                                 zIndex: 9999,
                                                 border: '1px solid rgba(0, 0, 0, 0.1)'
                                             }}>
-                                                <li>
-                                                    <Link to="/Product" style={{
-                                                        color: '#2C3E50',
-                                                        textDecoration: 'none',
-                                                        padding: '12px 20px',
-                                                        display: 'block',
-                                                        fontSize: '14px',
-                                                        fontWeight: '400',
-                                                        transition: 'all 0.3s ease'
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.target.style.backgroundColor = '#4CAF50';
-                                                        e.target.style.color = '#FFFFFF';
-                                                        e.target.style.paddingLeft = '25px';
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.target.style.backgroundColor = 'transparent';
-                                                        e.target.style.color = '#2C3E50';
-                                                        e.target.style.paddingLeft = '20px';
-                                                    }}>Products</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/Equipment" style={{
-                                                        color: '#2C3E50',
-                                                        textDecoration: 'none',
-                                                        padding: '12px 20px',
-                                                        display: 'block',
-                                                        fontSize: '14px',
-                                                        fontWeight: '400',
-                                                        transition: 'all 0.3s ease'
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.target.style.backgroundColor = '#4CAF50';
-                                                        e.target.style.color = '#FFFFFF';
-                                                        e.target.style.paddingLeft = '25px';
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.target.style.backgroundColor = 'transparent';
-                                                        e.target.style.color = '#2C3E50';
-                                                        e.target.style.paddingLeft = '20px';
-                                                    }}>Equipment</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/Productlist" style={{
-                                                        color: '#2C3E50',
-                                                        textDecoration: 'none',
-                                                        padding: '12px 20px',
-                                                        display: 'block',
-                                                        fontSize: '14px',
-                                                        fontWeight: '400',
-                                                        transition: 'all 0.3s ease'
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.target.style.backgroundColor = '#4CAF50';
-                                                        e.target.style.color = '#FFFFFF';
-                                                        e.target.style.paddingLeft = '25px';
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.target.style.backgroundColor = 'transparent';
-                                                        e.target.style.color = '#2C3E50';
-                                                        e.target.style.paddingLeft = '20px';
-                                                    }}>All Items</Link>
-                                                </li>
-                                            </ul>
+                                                <Link to="/Product" style={{
+                                                    background: '#2E7D32',
+                                                    color: '#fff',
+                                                    border: 'none',
+                                                    borderRadius: '6px',
+                                                    padding: '10px 24px',
+                                                    fontWeight: '500',
+                                                    fontSize: '15px',
+                                                    textDecoration: 'none',
+                                                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                                                    cursor: 'pointer',
+                                                    width: '100%',
+                                                    textAlign: 'center',
+                                                    transition: 'background 0.2s'
+                                                }}>Product</Link>
+                                                <Link to="/Equipment" style={{
+                                                    background: '#2E7D32',
+                                                    color: '#fff',
+                                                    border: 'none',
+                                                    borderRadius: '6px',
+                                                    padding: '10px 24px',
+                                                    fontWeight: '500',
+                                                    fontSize: '15px',
+                                                    textDecoration: 'none',
+                                                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                                                    cursor: 'pointer',
+                                                    width: '100%',
+                                                    textAlign: 'center',
+                                                    transition: 'background 0.2s'
+                                                }}>Equipments</Link>
+                                            </div>
                                         )}
                                     </li>
-
                                     {/* Schemes & Subsidies Dropdown */}
-                                    <li style={{ position: 'relative' }}
-                                        onMouseEnter={() => setShowSchemesDropdown(true)}
-                                        onMouseLeave={() => setShowSchemesDropdown(false)}>
-                                        <a href="#" style={{
-                                            color: '#FFFFFF',
-                                            textDecoration: 'none',
-                                            fontWeight: '500',
-                                            fontSize: '16px',
-                                            padding: '12px 16px',
-                                            borderRadius: '6px',
-                                            transition: 'all 0.3s ease',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            background: showSchemesDropdown ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-                                        }}>
+                                    <li style={{ position: 'relative' }}>
+                                        <button
+                                            className="dropdown-toggle"
+                                            onClick={() => {
+                                                setShowProductsDropdown(false);
+                                                setShowSchemesDropdown(!showSchemesDropdown);
+                                            }}
+                                            style={{
+                                                color: '#FFFFFF',
+                                                background: showSchemesDropdown ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                                                textDecoration: 'none',
+                                                fontWeight: '500',
+                                                fontSize: '16px',
+                                                padding: '12px 16px',
+                                                borderRadius: '6px',
+                                                transition: 'all 0.3s ease',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                border: 'none',
+                                                cursor: 'pointer'
+                                            }}
+                                            /* onClick handled above */
+                                            aria-expanded={showSchemesDropdown}
+                                        >
+                                            <i className="fas fa-hand-holding-usd" style={{ marginRight: '8px' }}></i>
                                             Schemes & Subsidies
                                             <i className="fa fa-chevron-down" style={{
-                                                marginLeft: '5px', 
+                                                marginLeft: '5px',
                                                 fontSize: '12px',
                                                 transform: showSchemesDropdown ? 'rotate(180deg)' : 'rotate(0deg)',
                                                 transition: 'transform 0.3s ease'
                                             }}></i>
-                                        </a>
-                                        
+                                        </button>
                                         {showSchemesDropdown && (
-                                            <ul style={{
+                                            <div className="sub-menu show" style={{
                                                 position: 'absolute',
                                                 top: '100%',
                                                 left: '0',
@@ -182,79 +208,47 @@ function Mainhead() {
                                                 minWidth: '220px',
                                                 boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
                                                 borderRadius: '8px',
-                                                padding: '8px 0',
-                                                listStyle: 'none',
-                                                margin: '0',
+                                                padding: '16px',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'center',
+                                                gap: '12px',
                                                 zIndex: 9999,
                                                 border: '1px solid rgba(0, 0, 0, 0.1)'
                                             }}>
-                                                <li>
-                                                    <Link to="/Sechemes" style={{
-                                                        color: '#2C3E50',
-                                                        textDecoration: 'none',
-                                                        padding: '12px 20px',
-                                                        display: 'block',
-                                                        fontSize: '14px',
-                                                        fontWeight: '400',
-                                                        transition: 'all 0.3s ease'
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.target.style.backgroundColor = '#4CAF50';
-                                                        e.target.style.color = '#FFFFFF';
-                                                        e.target.style.paddingLeft = '25px';
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.target.style.backgroundColor = 'transparent';
-                                                        e.target.style.color = '#2C3E50';
-                                                        e.target.style.paddingLeft = '20px';
-                                                    }}>Schemes</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/Subsidies" style={{
-                                                        color: '#2C3E50',
-                                                        textDecoration: 'none',
-                                                        padding: '12px 20px',
-                                                        display: 'block',
-                                                        fontSize: '14px',
-                                                        fontWeight: '400',
-                                                        transition: 'all 0.3s ease'
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.target.style.backgroundColor = '#4CAF50';
-                                                        e.target.style.color = '#FFFFFF';
-                                                        e.target.style.paddingLeft = '25px';
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.target.style.backgroundColor = 'transparent';
-                                                        e.target.style.color = '#2C3E50';
-                                                        e.target.style.paddingLeft = '20px';
-                                                    }}>Subsidies</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/Agriculture" style={{
-                                                        color: '#2C3E50',
-                                                        textDecoration: 'none',
-                                                        padding: '12px 20px',
-                                                        display: 'block',
-                                                        fontSize: '14px',
-                                                        fontWeight: '400',
-                                                        transition: 'all 0.3s ease'
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.target.style.backgroundColor = '#4CAF50';
-                                                        e.target.style.color = '#FFFFFF';
-                                                        e.target.style.paddingLeft = '25px';
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.target.style.backgroundColor = 'transparent';
-                                                        e.target.style.color = '#2C3E50';
-                                                        e.target.style.paddingLeft = '20px';
-                                                    }}>Agriculture Support</Link>
-                                                </li>
-                                            </ul>
+                                                <Link to="/Sechemes" style={{
+                                                    background: '#2E7D32',
+                                                    color: '#fff',
+                                                    border: 'none',
+                                                    borderRadius: '6px',
+                                                    padding: '10px 24px',
+                                                    fontWeight: '500',
+                                                    fontSize: '15px',
+                                                    textDecoration: 'none',
+                                                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                                                    cursor: 'pointer',
+                                                    width: '100%',
+                                                    textAlign: 'center',
+                                                    transition: 'background 0.2s'
+                                                }}>Schemes</Link>
+                                                <Link to="/Subsidies" style={{
+                                                    background: '#2E7D32',
+                                                    color: '#fff',
+                                                    border: 'none',
+                                                    borderRadius: '6px',
+                                                    padding: '10px 24px',
+                                                    fontWeight: '500',
+                                                    fontSize: '15px',
+                                                    textDecoration: 'none',
+                                                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                                                    cursor: 'pointer',
+                                                    width: '100%',
+                                                    textAlign: 'center',
+                                                    transition: 'background 0.2s'
+                                                }}>Subsidies</Link>
+                                            </div>
                                         )}
                                     </li>
-
                                     <li>
                                         <Link to="/About" style={{
                                             color: '#FFFFFF',
@@ -272,7 +266,6 @@ function Mainhead() {
                     </div>
                 </div>
             </div>
-
             {/* Search Bar Section - Below Navigation */}
             <div className="header_section">
                 <div className="container">
@@ -288,16 +281,13 @@ function Mainhead() {
                             </div>
                         </div>
                         <div className="header_box">
-                            <div className="custom_menu">
-                                <ul>
-                                    <select className="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option defaultValue>English</option>
-                                        <option value="1">हिन्दी</option>
-                                        <option value="2">ગુજરાતી</option>
-                                    </select>
-                                </ul>
+                            <div style={{ marginTop: '10px' }}>
+                                <select className="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option defaultValue>English</option>
+                                    <option value="1">हिन्दी</option>
+                                    <option value="2">ગુજરાતી</option>
+                                </select>
                             </div>
-
                             <div className="login_menu">
                                 <ul>
                                     <li>

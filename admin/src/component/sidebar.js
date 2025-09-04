@@ -1,158 +1,143 @@
 import React from "react";
 
-
 function Sidebar() {
   return (
     <>
-	
-<nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
-		<div class="navbar-wrapper ">
-			<div class="navbar-brand header-logo">
-				<a href="/" class="b-brand">
-				
-				    <img src="./resources/assets/images/logo.png" alt="" class="logo-images"></img>
-					
-					
-				</a>
-				<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
-				
-			</div>
-			<div class="navbar-content scroll-div">
-				<ul class="nav pcoded-inner-navbar">
+      <aside className="sidebar">
+        <div className="sidebar-header">
+          <a href="/" className="brand">
+            <img src="./resources/assets/images/logo.png" alt="Logo" className="logo-images" />
+          </a>
+        </div>
 
+        <ul className="sidebar-nav">
+          <li className="nav-item">
+            <a href="/Dashboard" className="nav-link">
+              <i className="feather icon-home"></i> Dashboard
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/Manage_agriculture" className="nav-link">
+              <i className="feather icon-box"></i> Manage Agriculture
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/Manage_fruit" className="nav-link">
+              <i className="feather icon-box"></i> Manage Fruit
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/Manage_vegetable" className="nav-link">
+              <i className="feather icon-box"></i> Manage Vegetable
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/Manage_gardening" className="nav-link">
+              <i className="feather icon-box"></i> Manage Gardening
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/Manage_fertilizer" className="nav-link">
+              <i className="feather icon-box"></i> Manage Fertilizer
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/Manage_disease" className="nav-link">
+              <i className="feather icon-box"></i> Manage Disease & Management
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/Manage_product" className="nav-link">
+              <i className="feather icon-box"></i> Manage Product
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/Manage_equipment" className="nav-link">
+              <i className="feather icon-box"></i> Manage Equipment
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/Manage_scheme" className="nav-link">
+              <i className="feather icon-box"></i> Manage Scheme
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/Manage_subside" className="nav-link">
+              <i className="feather icon-box"></i> Manage Subside
+            </a>
+          </li>
+        </ul>
+      </aside>
 
-					<br/>
-								
-
-
- 
-					<li class="nav-item pcoded-hasmenu">
-						<a href="#!"><span class="pcoded-micon"><i class="feather icon-box"></i></span>
-						<span class="pcoded-mtext"> Agriculture</span></a>
-						<ul class="pcoded-submenu">
-						<li class="11"><a href="/Agriculture" class="">Upload Agriculture</a></li>
-						<li class="11"><a href="/Manage_agriculture" class="">Manage Agriculture</a></li>
-						</ul>
-					</li>
-
-
-
-					
-					<li class="nav-item pcoded-hasmenu">
-						<a href="#!"><span class="pcoded-micon"><i class="feather icon-box"></i>
-						</span><span class="pcoded-mtext"> Fruit</span></a>
-						<ul class="pcoded-submenu">
-						    <li class=""><a href="/Fruit" class="">Upload Fruit</a></li>
-							<li class=""><a href="/Manage_fruit" class="">Manage Fruit</a></li>
-						</ul>
-					</li>
-
-
-
-
-
-					<li class="nav-item pcoded-hasmenu">
-						<a href="#!"><span class="pcoded-micon"><i class="feather icon-box"></i>
-						</span><span class="pcoded-mtext"> Vegetable</span></a>
-						<ul class="pcoded-submenu">
-						    <li class=""><a href="/Vegetable" class="">Upload Vegetable</a></li>
-							<li class=""><a href="/Manage_vegetable" class="">Manage Vegetable</a></li>
-						</ul>
-					</li>
-
-					
-					
-
-	                <li class="nav-item pcoded-hasmenu">
-						<a href="#!"><span class="pcoded-micon"><i class="feather icon-box"></i>
-						</span><span class="pcoded-mtext"> Gardening</span></a>
-						<ul class="pcoded-submenu">
-						    <li class=""><a href="/Gardening" class="">Upload Gardening</a></li>
-							<li class=""><a href="/Manage_gardening" class="">Manage Gardening</a></li>
-						</ul>
-					</li>				
-					
-
-
-
-					<li class="nav-item pcoded-hasmenu">
-						<a href="#!"><span class="pcoded-micon"><i class="feather icon-box"></i>
-						</span><span class="pcoded-mtext"> Fertilizer</span></a>
-						<ul class="pcoded-submenu">
-						    <li class=""><a href="/Fertilizer" class="">Upload Fertilizer</a></li>
-							<li class=""><a href="/Manage_fertilizer" class="">Manage Fertilizer</a></li>
-						</ul>
-					</li>
-
-
-
-
-					<li class="nav-item pcoded-hasmenu">
-						<a href="#!"><span class="pcoded-micon"><i class="feather icon-box"></i>
-						</span><span class="pcoded-mtext"> Disease & Management</span></a>
-						<ul class="pcoded-submenu">
-						    <li class=""><a href="/Disease" class="">Upload Disease &<br/> Management</a></li>
-							<li class=""><a href="/Manage_disease" class="">Manage Disease & Management</a></li>
-						</ul>
-					</li>
-
-
-
-
-					<li class="nav-item pcoded-hasmenu">
-						<a href="#!"><span class="pcoded-micon"><i class="feather icon-box"></i>
-						</span><span class="pcoded-mtext"> Product</span></a>
-						<ul class="pcoded-submenu">
-						    <li class=""><a href="/Product" class="">Upload Product</a></li>
-							<li class=""><a href="/Manage_product" class="">Manage Product</a></li>
-						</ul>
-					</li>
-
-
-
-
-					<li class="nav-item pcoded-hasmenu">
-						<a href="#!"><span class="pcoded-micon"><i class="feather icon-box"></i>
-						</span><span class="pcoded-mtext"> Equipment</span></a>
-						<ul class="pcoded-submenu">
-						    <li class=""><a href="/Equipment" class="">Upload Equipment</a></li>
-							<li class=""><a href="/Manage_equipment" class="">Manage Equipment</a></li>
-						</ul>
-					</li>
-
-
-
-
-					<li class="nav-item pcoded-hasmenu">
-						<a href="#!"><span class="pcoded-micon"><i class="feather icon-box"></i>
-						</span><span class="pcoded-mtext"> Scheme</span></a>
-						<ul class="pcoded-submenu">
-						    <li class=""><a href="/Scheme" class="">Upload Scheme</a></li>
-							<li class=""><a href="/Manage_scheme" class="">Manage Scheme</a></li>
-						</ul>
-					</li>
-
-
-
-
-					<li class="nav-item pcoded-hasmenu">
-						<a href="#!"><span class="pcoded-micon"><i class="feather icon-box"></i>
-						</span><span class="pcoded-mtext"> Subside</span></a>
-						<ul class="pcoded-submenu">
-						    <li class=""><a href="/Subside" class="">Upload Subside</a></li>
-							<li class=""><a href="/Manage_subside" class="">Manage Subside</a></li>
-						</ul>
-					</li>
-
-					
-				
-				</ul>
-				
-			</div>
-		</div>
-	</nav>
-
+      <style jsx>{`
+        .sidebar {
+          width: 260px;
+          height: 100vh;
+          position: fixed;
+          left: 0;
+          top: 0;
+          background: #4caf50;
+          color: white;
+          display: flex;
+          flex-direction: column;
+          padding: 20px 0;
+          box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+        }
+        .sidebar-header {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        .brand {
+          display: inline-block;
+        }
+        .logo-images {
+          max-width: 140px;
+          height: auto;
+        }
+        .sidebar-nav {
+          list-style: none;
+          padding-left: 0;
+          margin: 0;
+          flex: 1;
+          overflow-y: auto;
+        }
+        .nav-item {
+          margin-bottom: 12px;
+        }
+        .nav-link {
+          color: white;
+          text-decoration: none;
+          font-size: 1rem;
+          padding: 12px 24px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          border-left: 4px solid transparent;
+          transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .nav-link:hover {
+          background-color: #388e3c;
+          border-left-color: #c8e6c9;
+          color: #c8e6c9;
+        }
+        .nav-link i {
+          font-size: 18px;
+        }
+        /* Scrollbar styling */
+        .sidebar-nav::-webkit-scrollbar {
+          width: 6px;
+        }
+        .sidebar-nav::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.1);
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+          background-color: rgba(255, 255, 255, 0.3);
+          border-radius: 3px;
+        }
+      `}</style>
     </>
   );
+}
 
-}export default Sidebar;
+export default Sidebar;

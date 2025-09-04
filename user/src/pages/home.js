@@ -42,8 +42,8 @@ function Home() {
                                 and sustainable farming solutions for a greener tomorrow.
                             </p>
                             
-                            <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                                <Link to="/Product" style={{ textDecoration: 'none' }}>
+                            <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
+                                <Link to="/Product" style={{ textDecoration: 'none', position: 'relative', zIndex: 10 }}>
                                     <button className="btn-agriculture" style={{
                                         padding: '16px 32px',
                                         fontSize: '1.1rem',
@@ -53,13 +53,23 @@ function Home() {
                                         borderRadius: '25px',
                                         color: 'white',
                                         cursor: 'pointer',
-                                        transition: 'all 0.3s ease'
+                                        transition: 'all 0.3s ease',
+                                        position: 'relative',
+                                        zIndex: 10
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.target.style.transform = 'translateY(-2px)';
+                                        e.target.style.boxShadow = '0 12px 30px rgba(255, 193, 7, 0.4)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.target.style.transform = 'translateY(0)';
+                                        e.target.style.boxShadow = '0 8px 24px rgba(255, 193, 7, 0.3)';
                                     }}>
                                         <i className="fa fa-shopping-bag" style={{ marginRight: '8px' }}></i>
                                         Explore Products
                                     </button>
                                 </Link>
-                                <Link to="/Equipment" style={{ textDecoration: 'none' }}>
+                                <Link to="/Equipment" style={{ textDecoration: 'none', position: 'relative', zIndex: 10 }}>
                                     <button className="btn-agriculture-outline" style={{
                                         padding: '14px 30px',
                                         fontSize: '1.1rem',
@@ -68,7 +78,19 @@ function Home() {
                                         color: '#FFFFFF',
                                         borderRadius: '25px',
                                         cursor: 'pointer',
-                                        transition: 'all 0.3s ease'
+                                        transition: 'all 0.3s ease',
+                                        position: 'relative',
+                                        zIndex: 10
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.target.style.transform = 'translateY(-2px)';
+                                        e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+                                        e.target.style.boxShadow = '0 8px 20px rgba(255, 255, 255, 0.2)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.target.style.transform = 'translateY(0)';
+                                        e.target.style.background = 'transparent';
+                                        e.target.style.boxShadow = 'none';
                                     }}>
                                         <i className="fa fa-cogs" style={{ marginRight: '8px' }}></i>
                                         View Equipment

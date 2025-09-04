@@ -5,11 +5,12 @@ import { Link, useLocation } from 'react-router-dom';
 const menuStyles = {
   bmBurgerButton: {
     position: 'fixed',
-    width: '28px',
+    width: '30px',
     height: '24px',
-    left: '24px',
-    top: '24px',
-    zIndex: 1001
+    left: '20px',
+    top: '20px',
+    zIndex: 1001,
+    cursor: 'pointer'
   },
   bmBurgerBars: {
     background: '#2E7D32',
@@ -34,7 +35,8 @@ const menuStyles = {
     height: '100%',
     top: 0,
     left: 0,
-    zIndex: 1000
+    zIndex: 1002,
+    width: '280px'
   },
   bmMenu: {
     background: 'linear-gradient(180deg, #FFFFFF 0%, #E8F5E8 100%)',
@@ -72,6 +74,8 @@ function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
+  const isHomePage = location.pathname === "/" || location.pathname === "/home";
+
   const handleStateChange = (state) => {
     setIsOpen(state.isOpen);
   };
@@ -85,17 +89,17 @@ function Sidebar() {
   };
 
   const menuItems = [
-    { to: "/", icon: "fa-home", label: "Tech-Farm", isHome: true },
-    { to: "/Product", icon: "fa-shopping-bag", label: "Products", category: "marketplace" },
-    { to: "/Equipment", icon: "fa-cogs", label: "Equipment", category: "marketplace" },
-    { to: "/Sechemes", icon: "fa-file-text", label: "Schemes", category: "government" },
-    { to: "/Subsidies", icon: "fa-money-bill-wave", label: "Subsidies", category: "government" },
-    { to: "/Agriculture", icon: "fa-tree", label: "Agriculture", category: "farming" },
-    { to: "/Fruit", icon: "fa-apple", label: "Fruit Farming", category: "farming" },
+    { to: "/", icon: "fa-tractor", label: "Tech-Farm", isHome: true },
+    { to: "/Product", icon: "fa-seedling", label: "Products", category: "marketplace" },
+    { to: "/Equipment", icon: "fa-tools", label: "Equipment", category: "marketplace" },
+    { to: "/Sechemes", icon: "fa-scroll", label: "Schemes", category: "government" },
+    { to: "/Subsidies", icon: "fa-hand-holding-usd", label: "Subsidies", category: "government" },
+    { to: "/Agriculture", icon: "fa-wheat", label: "Agriculture", category: "farming" },
+    { to: "/Fruit", icon: "fa-apple-alt", label: "Fruit Farming", category: "farming" },
     { to: "/Vagetable", icon: "fa-carrot", label: "Vegetable Farming", category: "farming" },
-    { to: "/Gardaning", icon: "fa-seedling", label: "Gardening", category: "farming" },
-    { to: "/Fertilizer", icon: "fa-tint", label: "Fertilizers", category: "farming" },
-    { to: "/Diseasecontrolandmanagement", icon: "fa-shield-alt", label: "Disease Control", category: "farming" }
+    { to: "/Gardaning", icon: "fa-leaf", label: "Gardening", category: "farming" },
+    { to: "/Fertilizer", icon: "fa-flask", label: "Fertilizers", category: "farming" },
+    { to: "/Diseasecontrolandmanagement", icon: "fa-shield-virus", label: "Disease Control", category: "farming" }
   ];
 
   const getActiveLinkStyle = (itemPath, category) => {
@@ -182,10 +186,38 @@ function Sidebar() {
         onStateChange={handleStateChange}
         styles={menuStyles}
         customBurgerIcon={
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', height: '100%' }}>
-            <span style={{ display: 'block', height: '3px', background: '#2E7D32', borderRadius: '2px' }}></span>
-            <span style={{ display: 'block', height: '3px', background: '#2E7D32', borderRadius: '2px' }}></span>
-            <span style={{ display: 'block', height: '3px', background: '#2E7D32', borderRadius: '2px' }}></span>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'space-between', 
+            height: '28px',
+            width: '30px'
+          }}>
+            <span style={{ 
+              display: 'block', 
+              height: '3px', 
+              background: isHomePage ? '#FFFFFF' : '#333333', 
+              borderRadius: '3px',
+              transition: 'all 0.3s ease',
+              boxShadow: isHomePage ? '0 1px 2px rgba(0,0,0,0.2)' : 'none'
+            }}></span>
+            <span style={{ 
+              display: 'block', 
+              height: '3px', 
+              background: isHomePage ? '#FFFFFF' : '#333333', 
+              borderRadius: '3px',
+              margin: '9px 0',
+              transition: 'all 0.3s ease',
+              boxShadow: isHomePage ? '0 1px 2px rgba(0,0,0,0.2)' : 'none'
+            }}></span>
+            <span style={{ 
+              display: 'block', 
+              height: '3px', 
+              background: isHomePage ? '#FFFFFF' : '#333333', 
+              borderRadius: '3px',
+              transition: 'all 0.3s ease',
+              boxShadow: isHomePage ? '0 1px 2px rgba(0,0,0,0.2)' : 'none'
+            }}></span>
           </div>
         }
         customCrossIcon={
